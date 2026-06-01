@@ -135,4 +135,3 @@
 13.7 The courts for Licensor's registered office shall have exclusive jurisdiction over all disputes under and in connection with this Agreement.
 
 13.8 Should any provision of this Agreement be or become invalid, this shall not affect the validity of the remaining terms. In such event, the Parties shall be obliged to cooperate in the creation of terms which achieve such legally valid result as comes closest commercially to that of the invalid provision. The above shall apply accordingly to the closing of any gaps in the Agreement.
-
