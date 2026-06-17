@@ -9,7 +9,7 @@ let package = Package(
     .library(name: "IMGLYPluginBackgroundRemoval", targets: ["IMGLYPluginBackgroundRemoval"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.76.1-rc.0"),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.76.1"),
   ],
   targets: [
     .target(
