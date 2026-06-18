@@ -29,10 +29,20 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.77.0-rc.2"),
-    .package(url: "https://github.com/microsoft/onnxruntime-swift-package-manager.git", exact: "1.24.2"),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.77.0-rc.3"),
   ],
   targets: [
+    .binaryTarget(
+      name: "onnxruntime",
+      url: "https://cdn.img.ly/packages/imgly/onnxruntime/1.24.2/onnxruntime.xcframework.zip",
+      checksum: "03f4cb6719fa308b4e521cbcf6ba4ae1bc7d52bda4f46d1cf707b0ef2a0aac9e",
+    ),
+    .target(
+      name: "OnnxRuntimeBindings",
+      dependencies: ["onnxruntime"],
+      path: "Sources/OnnxRuntimeBindings",
+      cxxSettings: [.define("SPM_BUILD")],
+    ),
     .target(
       name: "IMGLYPluginBackgroundRemovalCore",
       dependencies: [
@@ -55,7 +65,7 @@ let package = Package(
       name: "IMGLYPluginBackgroundRemovalONNX",
       dependencies: [
         .target(name: "IMGLYPluginBackgroundRemovalCore"),
-        .product(name: "onnxruntime", package: "onnxruntime-swift-package-manager"),
+        .target(name: "OnnxRuntimeBindings"),
       ],
     ),
     .target(
@@ -67,4 +77,5 @@ let package = Package(
       ],
     ),
   ],
+  cxxLanguageStandard: .cxx17,
 )
