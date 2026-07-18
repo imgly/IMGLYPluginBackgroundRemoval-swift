@@ -74,7 +74,9 @@ private actor SessionLoader {
     } catch {
       // Don't cache a failed download/compile — allow the next caller to retry.
       // Guard against clearing a newer task that replaced ours while we awaited.
-      if sessionTask == task { sessionTask = nil }
+      if sessionTask == task {
+        sessionTask = nil
+      }
       throw error
     }
   }

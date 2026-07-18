@@ -79,7 +79,9 @@ actor ONNXSession {
   // MARK: - Private
 
   private func getSession() throws -> ORTSession {
-    if let session { return session }
+    if let session {
+      return session
+    }
 
     let options = try ORTSessionOptions()
 

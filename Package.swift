@@ -1,4 +1,4 @@
-// swift-tools-version:6.2
+// swift-tools-version:6.3.1
 import PackageDescription
 
 let package = Package(
@@ -29,7 +29,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.78.0"),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.79.0-rc.0"),
   ],
   targets: [
     .binaryTarget(
