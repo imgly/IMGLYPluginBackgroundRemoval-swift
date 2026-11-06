@@ -29,7 +29,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.85.1"),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.85.2"),
   ],
   targets: [
     .binaryTarget(
