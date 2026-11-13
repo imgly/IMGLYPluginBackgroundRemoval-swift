@@ -29,7 +29,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.86.0"),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.86.1"),
     // Versioned on its own, so the release bump leaves this pin. A patch release is a packaging fix and reaches
     // released plugins; a new ONNX Runtime version raises the minor version and does not.
     .package(url: "https://github.com/imgly/IMGLYONNXRuntime-swift.git", .upToNextMinor(from: "1.0.0")),
