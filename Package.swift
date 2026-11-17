@@ -1,4 +1,4 @@
-// swift-tools-version:6.3.3
+// swift-tools-version:6.3.1
 import PackageDescription
 
 let package = Package(
@@ -29,12 +29,20 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.87.0-rc.0"),
-    // Versioned on its own, so the release bump leaves this pin. A patch release is a packaging fix and reaches
-    // released plugins; a new ONNX Runtime version raises the minor version and does not.
-    .package(url: "https://github.com/imgly/IMGLYONNXRuntime-swift.git", .upToNextMinor(from: "1.0.0")),
+    .package(url: "https://github.com/imgly/IMGLYUI-swift.git", exact: "1.85.4"),
   ],
   targets: [
+    .binaryTarget(
+      name: "onnxruntime",
+      url: "https://cdn.img.ly/packages/imgly/onnxruntime/1.24.2/onnxruntime.xcframework.zip",
+      checksum: "03f4cb6719fa308b4e521cbcf6ba4ae1bc7d52bda4f46d1cf707b0ef2a0aac9e",
+    ),
+    .target(
+      name: "OnnxRuntimeBindings",
+      dependencies: ["onnxruntime"],
+      path: "Sources/OnnxRuntimeBindings",
+      cxxSettings: [.define("SPM_BUILD")],
+    ),
     .target(
       name: "IMGLYPluginBackgroundRemovalCore",
       dependencies: [
@@ -57,7 +65,7 @@ let package = Package(
       name: "IMGLYPluginBackgroundRemovalONNX",
       dependencies: [
         .target(name: "IMGLYPluginBackgroundRemovalCore"),
-        .product(name: "IMGLYONNXRuntime", package: "IMGLYONNXRuntime-swift"),
+        .target(name: "OnnxRuntimeBindings"),
       ],
     ),
     .target(
@@ -69,4 +77,5 @@ let package = Package(
       ],
     ),
   ],
+  cxxLanguageStandard: .cxx17,
 )
