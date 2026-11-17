@@ -4,7 +4,7 @@ import Foundation
 public enum BackgroundRemovalError: LocalizedError, Sendable {
   /// No active page was found in the current scene.
   case noPageFound
-  /// The current page's fill is not an image.
+  /// The block has no image fill.
   case noImageFound(currentType: String)
   /// The image fill has no source URI.
   case noImageSourceFound
@@ -28,7 +28,7 @@ public enum BackgroundRemovalError: LocalizedError, Sendable {
     case .noPageFound:
       "No active page found in the editor."
     case let .noImageFound(currentType):
-      "The current page doesn't contain an image. Current content type: \(currentType)"
+      "The block doesn't contain an image. Current content type: \(currentType)"
     case .noImageSourceFound:
       "No image source found for background removal."
     case .imageConversionFailed:

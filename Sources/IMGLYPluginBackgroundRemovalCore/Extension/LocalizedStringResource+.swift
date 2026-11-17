@@ -12,4 +12,6 @@ extension LocalizationTable {
 extension LocalizedStringResource {
   static let backgroundRemovalDockButton: LocalizedStringResource = .imgly
     .localized("ly_img_plugin_background_removal_dock_button", table: .imglyPluginBackgroundRemoval)
+  static let backgroundRemovalInspectorBarButton: LocalizedStringResource = .imgly
+    .localized("ly_img_plugin_background_removal_inspector_bar_button", table: .imglyPluginBackgroundRemoval)
 }

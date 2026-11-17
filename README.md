@@ -4,7 +4,7 @@
 
 AI-powered background removal for the IMG.LY [Creative Editor SDK](https://img.ly/products/creative-sdk) on iOS — fully on-device, ANE-accelerated, drop-in.
 
-A single line adds a one-tap dock button to the editor. The user taps it, the subject is cut out, the background goes transparent — no servers, no API keys, no per-image cost.
+A single line adds a one-tap button to the editor's dock, and one more argument adds it to the inspector bar. The user taps it, the subject is cut out, the background goes transparent — no servers, no API keys, no per-image cost.
 
 Visit our [documentation](https://img.ly/docs/cesdk) for more tutorials on how to integrate and customize the editor for your specific use case.
 
@@ -53,7 +53,20 @@ Editor(settings).imgly.configuration {
 }
 ```
 
-That's it. The button appears in the editor's dock. Tapping it runs background removal on the current page's image fill and replaces the fill with the masked result — undo/redo are wired up for free.
+That's it. The dock button runs background removal on the current page's image and replaces it with the masked result — undo/redo are wired up for free.
+
+To also run it on the selected image or page, add the inspector bar button with `inspectorBarModifier`. The same closure, and `dockModifier`, move a button or leave it out:
+
+```swift
+BackgroundRemovalPlugin(
+  inspectorBarModifier: { items, button in
+    items.addFirst { button }
+  },
+  dockModifier: { _, _ in }, // no dock button
+)
+```
+
+A button only shows when its block has an image fill that the user may change. Stickers never show it, and neither does an SVG image. The user can start removals on several images, and the model runs on one image at a time.
 
 The zero-arg initializer defaults to IS-Net FP16 on the Apple Neural Engine. The model is downloaded from IMG.LY's CDN on first use (~84 MB, cached on disk) and CoreML-compiled in the background as soon as the editor is being presented, so the first user tap is near-instant.
 
@@ -122,13 +135,13 @@ struct ServerSideConfiguration: BackgroundRemovalConfiguration {
 BackgroundRemovalPlugin(configuration: ServerSideConfiguration())
 ```
 
-The plugin handles dock integration, processing state, undo/redo wiring, and error surfacing. Your code just produces the masked image.
+The plugin handles the dock and inspector bar integration, processing state, undo/redo wiring, and error surfacing. Your code just produces the masked image.
 
 If your backend benefits from a warm-up (model download, TLS handshake, auth token fetch), implement `prewarm()` on your provider. The plugin calls it from the editor's `onCreate` lifecycle hook on every presentation.
 
 ## Documentation
 
-The full documentation lives at [img.ly/docs/cesdk](https://img.ly/docs/cesdk). The background-removal guide walks through dock integration, configuration, and common patterns across iOS, Android, and web.
+The full documentation lives at [img.ly/docs/cesdk](https://img.ly/docs/cesdk). The background-removal guide walks through the integration, configuration, and common patterns across iOS, Android, and web.
 
 ## Changelog
 
